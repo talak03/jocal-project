@@ -20,11 +20,6 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.error("❌ MongoDB Error:", err));
 
-
-  const wishlistRoutes = require('./routes/wishlist');
-app.use('/wishlist', wishlistRoutes);
-
-
 // Product model
 const Product = mongoose.model('Product', {
   title: String,
