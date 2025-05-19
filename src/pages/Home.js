@@ -25,8 +25,8 @@ const Home = () => {
 
         <nav className="main-nav">
           <a href="#" className="nav-link">Our Story</a>
-          <a href="#" className="nav-link">Deals</a>
-          <a href="#" className="nav-link">Contact</a>
+          <a href="/login" className="nav-link">Deals</a>
+          <a href="/contact" className="nav-link">Contact</a>
         </nav>
 
         <div className="header-actions">
@@ -35,7 +35,7 @@ const Home = () => {
           <a href="#" className="icon-button" title="Profile">
             <img src="" alt="Profile" className="profile-icon" />
           </a>
-          <a href="#" className="icon-button" title="Wishlist">
+          <a href="/wishlist" className="icon-button" title="Wishlist">
             <svg className="icon" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
               4.42 3 7.5 3c1.74 0 3.41 1.01 4.5 2.09C13.09

@@ -1,7 +1,11 @@
+
+// src/pages/Item.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import '../styles/Item.css'; 
+import { Link } from 'react-router-dom';
+
 import axios from "axios";
+import "../styles/Item.css";
 
 const Item = () => {
   const { id } = useParams();
@@ -13,16 +17,21 @@ const Item = () => {
   ]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
-        setProduct(res.data);
-      } catch (error) {
-        console.error("Failed to fetch product", error);
-      }
-    };
-    fetchProduct();
-  }, [id]);
+  console.log("📦 Trying to fetch product with ID:", id);
+
+  const fetchProduct = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+      console.log("✅ Product loaded:", res.data);
+      setProduct(res.data);
+    } catch (error) {
+      console.error("❌ Failed to fetch product", error.response?.data || error.message);
+    }
+  };
+
+  fetchProduct();
+}, [id]);
+
 
   const addReview = () => {
     if (reviewInput.trim()) {
@@ -31,7 +40,7 @@ const Item = () => {
     }
   };
 
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <div className="loading">Loading...</div>;
 
   return (
     <div>
@@ -40,13 +49,14 @@ const Item = () => {
           <div className="logo">JOCAL</div>
           <nav className="nav-links">
             <a href="/">Home</a>
-            <a href="/Shop">Shop</a>
-            <a href="#">Deals</a>
+            <a href="/shop">Shop</a>
             <a href="/contact.html">Contact</a>
           </nav>
           <div className="nav-icons">
             <i className="fa-regular fa-user"></i>
-            <i className="fa-regular fa-heart"></i>
+            <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }}className="wishlist-btn">
+              <i className="fa-regular fa-heart"></i>
+            </Link>
             <i className="fa-solid fa-cart-shopping"></i>
           </div>
         </div>
@@ -55,14 +65,19 @@ const Item = () => {
       <div className="product-page">
         <div className="product-container">
           <div className="product-images">
-            <img src={product.image} alt={product.title} className="main-image" />
+            <img
+              src={product.image.replace("{width}", "300")}
+              alt={product.title}
+              className="main-image"
+            />
 
             <div className="review-section">
               <h3>Reviews</h3>
               <ul className="review-list">
                 {reviews.map((r, index) => (
                   <li key={index}>
-                    <strong>{r.name}</strong> – {"★".repeat(r.stars)}<br />{r.comment}
+                    <strong>{r.name}</strong> – {"\u2605".repeat(r.stars)}<br />
+                    {r.comment}
                   </li>
                 ))}
               </ul>
@@ -82,29 +97,33 @@ const Item = () => {
             <h2>{product.title}</h2>
             <div className="brand">by {product.brand}</div>
             <div className="price">{product.price} JOD</div>
-            <div style={{ margin: "20px 0" }}>{product.description}</div>
+            <div className="description" style={{ margin: "20px 0" }}>
+              {product.description
+                ?.split(/<\/p>/i)
+                .map((para, idx) => {
+                  const clean = para
+                    .replace(/<[^>]+>/g, '') // Remove any HTML tags
+                    .trim();
+                  return clean && <p key={idx}>{clean}</p>;
+                })}
+            </div>
 
-            <a href={product.url} target="_blank" rel="noopener noreferrer" className="visit-site-btn">
+
+            <a
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+            >
               <i className="fa-solid fa-arrow-up-right-from-square"></i> Visit Original Website
             </a>
 
-            <button className="add-to-cart">
+            <button className="btn-primary">
               <i className="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
-
           </div>
         </div>
       </div>
-
-      <section className="recently-viewed">
-        <h3>Recently Viewed</h3>
-        <div className="recent-grid">
-          <div className="recent-card">
-            <img src={product.image} alt={product.title} />
-            <h4>{product.title}</h4>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
