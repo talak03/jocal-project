@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
       productId: String,
       title: String,
       image: String,
-      price: Number
+      price: Number,
+      URL: String
     }
   ]
 });

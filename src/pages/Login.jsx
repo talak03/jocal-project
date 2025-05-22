@@ -1,10 +1,13 @@
-
-// src/pages/LoginRegister.jsx
 import React, { useState } from "react";
 import "../styles/Login.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
+  const [loginError, setLoginError] = useState("");
+ const [registerError, setregisterError] = useState("");
+  const navigate = useNavigate();
   const containerClass = isSignUpActive ? "login-container right-panel-active" : "login-container";
 
   const handleToggle = () => setIsSignUpActive(!isSignUpActive);
@@ -15,23 +18,26 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
       });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Login successful!");
-      } else {
-        alert(data.message || "Login failed");
-      }
+
+      localStorage.setItem("token", res.data.token);
+     setLoginError("");
+      navigate("/"); 
+
     } catch (error) {
-      alert("Something went wrong. Please try again.");
-      console.error("Error:", error);
+      const message = error.response?.data?.message || "Login failed";
+    
+     if (message === "Invalid email or password") {
+      setLoginError("Invalid email or password");
+    } else {
+      setLoginError("Something went wrong. Please try again.");
     }
-  };
+    console.error("Login error:", error);
+  }
+};
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -40,35 +46,43 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
+        username,
+        email,
+        password,
       });
-      const data = await res.json();
-      if (res.ok) {
-        alert("Registration successful! You can now sign in.");
-        setIsSignUpActive(false);
-      } else {
-        alert(data.message || "Registration failed");
-      }
+
+      setregisterError("");
+      setIsSignUpActive(false);
+
     } catch (error) {
-      alert("Something went wrong. Please try again.");
-      console.error("Error:", error);
+      const message = error.response?.data?.message || "Registration failed";
+      
+     
+     if (message === "Email already registered") {
+      setregisterError("User already exists");
+      
+    } else {
+      setregisterError("Something went wrong. Please try again.");
     }
-  };
+    console.error("register error:", error);
+  }
+};
 
   return (
+
+    //REGISTER
     <div className="login-wrapper">
       <div className={containerClass}>
         <div className="form-container sign-up-container">
           <form onSubmit={handleRegister}>
             <h1>Create Account</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-            </div>
-            <span>or use your email for registration</span>
+            {/* <div className="social-container"> */}
+              {/* <a href="#" className="social"><i className="fab fa-facebook-f"></i></a> */}
+              {/* <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a> */}
+            {/* </div> */}
+            {/* <span>or use your email for registration</span> */}
+                {registerError && <p className="register-error">{registerError}</p>}
             <input type="text" name="username" placeholder="Name" required />
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Password" required />
@@ -76,17 +90,21 @@ const Login = () => {
           </form>
         </div>
 
+
+
+           {/* LOGIN */}
         <div className="form-container sign-in-container">
           <form onSubmit={handleLogin}>
             <h1>Sign in</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div>
+           {/* <div className="social-container"> */}
+           {/* <a href="#" className="social"><i className="fab fa-facebook-f"></i></a> */}
+           {/* <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a> */}
+              {/* <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
+            {/* </div> */}
             <span>or use your account</span>
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Password" required />
+            {loginError && <p className="login-error">{loginError}</p>}
             <a href="#">Forgot your password?</a>
             <button type="submit">Sign In</button>
           </form>
@@ -95,7 +113,7 @@ const Login = () => {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
+              <h1>Welcome to Jocal!</h1>
               <p>To keep connected with us please login with your personal info</p>
               <button className="ghost" onClick={handleToggle}>Sign In</button>
             </div>
@@ -106,15 +124,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-
-        <footer>
-          <p>
-            Created with <i className="fa fa-heart"></i> by
-            <a target="_blank" rel="noreferrer" href="https://florin-pop.com"> Florin Pop </a>
-            - Read how I created this
-            <a target="_blank" rel="noreferrer" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/"> here </a>
-          </p>
-        </footer>
       </div>
     </div>
   );

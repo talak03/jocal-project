@@ -1,13 +1,7 @@
-
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const cors = require('cors');
 const auth = require('../middleware/auth');
-const User = require('../models/users');
-
-// Add CORS and JSON parsing if this router is used standalone (usually unnecessary here)
-// These are typically used in `server.js`, not in route files
+const User = require('../Models/users');
 
 // POST /wishlist/add
 router.post('/add', auth, async (req, res) => {
@@ -19,7 +13,7 @@ router.post('/add', auth, async (req, res) => {
     const exists = user.wishlist.find(item => item.productId.toString() === productId);
     if (exists) return res.status(400).json({ message: 'Product already in wishlist' });
 
-    user.wishlist.push({ productId, title, image, price });
+    user.wishlist.push({ productId, title, image, price, URL });
     await user.save();
     res.status(200).json({ message: 'Product added to wishlist' });
   } catch (err) {

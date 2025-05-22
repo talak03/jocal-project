@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Product');
+const Product = require('../Models/Product');
 
 // ✅ GET all products
 router.get('/', async (req, res) => {
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ✅ ADD THIS: Get a single product by ID
+
 router.get('/:id', async (req, res) => {
   console.log("📦 Requested product ID:", req.params.id);
   try {

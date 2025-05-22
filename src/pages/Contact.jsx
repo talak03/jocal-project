@@ -1,7 +1,6 @@
-
-// src/pages/Contact.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/Contact.css';
 
 const Contact = () => {
@@ -18,21 +17,12 @@ const Contact = () => {
     e.preventDefault();
     setStatus('Sending...');
     try {
-      const res = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus(data.error || 'Something went wrong.');
-      }
+      const res = await axios.post('http://localhost:5000/api/contact', formData);
+      setStatus('We Will contact with you as soon as possible!');
+      setFormData({ name: '', email: '', message: '' });
     } catch (err) {
       console.error('Error:', err);
-      setStatus('Error sending message.');
+      setStatus(err.response?.data?.msg || 'Error sending message.');
     }
   };
 
@@ -71,7 +61,7 @@ const Contact = () => {
         </div>
       </header>
 
-      {/* Contact Form */}
+      {}
       <div className="contact-card">
         <div className="contact-form">
           <form onSubmit={handleSubmit}>

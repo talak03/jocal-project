@@ -2,6 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
+const categoryImages = {
+  Clothing: "/images/categories/e03cafca825b48f50729cfda047bdd42.jpg",
+  Cosmetics: "/images/categories/photo-1608571423902-eed4a5ad8108.avif",
+  //Electronics: "/images/categories/electronics.jpg",
+  "Home &Furniture": "/images/categories/photo-1734107640189-4974176150f9.avif",
+  Jewllery: "/images/categories/DSC01325_045b1d96-ea16-408f-a234-9beaf56fecc5.webp",
+  Shoes: "/images/categories/photo-1560769629-975ec94e6a86.avif",
+};
+
 const Home = () => {
   return (
     <div className="container">
@@ -63,39 +72,38 @@ const Home = () => {
             <div className="hero-gallery">
               <div className="column column-up">
                 <div className="scroll-track">
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 1" />
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 2" />
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 3" />
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 4" />
+                  <img src="/images/slider/72472.jpg" alt="Product image 1" />
+                  <img src="/images/slider/Screenshot 2025-05-21 032536.png" alt="Product image 2" />
+                  <img src="/images/slider/DSC07822.webp" alt="Product image 3" />
+                  <img src="/images/slider/camel_navy_x110@2x.avif" alt="Product image 4" />
                 </div>
               </div>
               <div className="column column-down">
                 <div className="scroll-track">
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 5" />
+                  <img src="/images/slider/image_9d9be1bf-6cf7-47ca-809c-fd2721a31f0e_1024x1024@2x.webp" alt="Product image 5" />
                   <img src="https://via.placeholder.com/150x200" alt="Product image 6" />
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 7" />
-                  <img src="https://via.placeholder.com/150x200" alt="Product image 8" />
+                  <img src="/images/slider/DSC07822.webp" alt="Product image 7" />
+                  <img src="/images/slider/72472.jpg" alt="Product image 8" />
                 </div>
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="main-categories-section">
-          <h2 className="main-categories-title">Explore the best products by category – all in one place.</h2>
-          <div className="main-categories-wrapper">
-            {['Clothing', 'Cosmetics', 'Electronics', 'Home &Furniture', 'Accessories', 'Shoes'].map((cat, i) => (
-              <div className="main-category" key={i}>
-                <img src={`https://via.placeholder.com/200?text=${cat}`} alt={`${cat} category`} />
-                <p>{cat} <span>→</span></p>
-              </div>
-            ))}
-          </div>
-        </section>
+          </section>
+<section className="main-categories-section">
+  <h2 className="main-categories-title">Explore the best products by category – all in one place.</h2>
+  <div className="main-categories-wrapper">
+    {['Clothing', 'Cosmetics', 'Home &Furniture', 'Jewllery', 'Shoes'].map((cat, i) => (
+      <div className="main-category" key={i}>
+        <img src={categoryImages[cat]} alt={`${cat} category`} />
+        <p>{cat} <span>→</span></p>
+      </div>
+    ))}
+  </div>
+</section>
 
         <section className="story-card">
           <div className="card">
-            <img src="https://via.placeholder.com/400x300" alt="Local Bookstore in Jordan" className="card-image" />
+            <img src="/images/slider/photo-1564323082628-2bbd16c23a18.avif" alt="Local Bookstore in Jordan" className="card-image" />
             <div className="card-content">
               <h2 className="card-title">Our Story Begins Here</h2>
               <p>

@@ -215,3 +215,13 @@ button.ghost {
   color: #3c97bf;
   text-decoration: none;
 }
+.login-error {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 10px;
+}
+.register-error {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 10px;
+}

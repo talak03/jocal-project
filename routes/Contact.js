@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const router = express.Router();
 const sendEmail = require('../emailService'); 
@@ -19,7 +17,7 @@ router.post('/', (req, res) => {
 
   sendEmail({ name, email, message });
 
-  res.status(200).json({ msg: 'Message sent successfully' });
+  res.status(200).json({ msg: 'We will contact with you as soon as possible' });
 });
 
 module.exports = router;
