@@ -31,11 +31,23 @@ const Navbar = () => {
           <Link to="/" className="logo">Jocal</Link>
         </h1>
 
-        
+        <form className="search" role="search">
+          <input
+            type="text"
+            className="search__input"
+            placeholder="Search shops, deals..."
+            aria-label="Search"
+          />
+          <button className="search__button" aria-label="Search button">
+            <svg className="search__icon" viewBox="0 0 512 512">
+              <path d="M505 442.7L405.3 343..." />
+            </svg>
+          </button>
+        </form>
 
         <nav className="main-nav">
           <HashLink smooth to="/#our-story" className="nav-link">Our Story</HashLink>
-          <Link to="/shop" className="nav-link">Shop</Link>
+          <Link to="/shop" className="nav-link">Shops</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
         </nav>
 

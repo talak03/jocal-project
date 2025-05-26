@@ -1,7 +1,10 @@
+
 import React, { useState } from "react";
 import "../styles/Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+
 
 const Login = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
@@ -70,8 +73,8 @@ const Login = () => {
 };
 
   return (
-
-    //REGISTER
+<>
+    
     <div className="login-wrapper">
       <div className={containerClass}>
         <div className="form-container sign-up-container">
@@ -126,6 +129,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

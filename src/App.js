@@ -6,6 +6,7 @@ import Item from "./pages/Item";
 import Wishlist from "./pages/Wishlist";
 import Contact from './pages/Contact'; 
 import Login from './pages/Login';
+import Privacy from './pages/Privacy';
 
 
 
@@ -18,6 +19,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

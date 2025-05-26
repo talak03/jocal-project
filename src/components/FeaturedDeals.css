@@ -1,0 +1,138 @@
+.featured-deals {
+  padding: 60px 40px;
+  background: #f9f5f1;
+}
+
+.featured-deals h2 {
+  font-size: 32px;
+  font-weight: bolder;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #b46c4c;
+  
+
+}
+
+.deal-card {
+  width: 100%;
+  background: #f9f5f1;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner-swiper {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 12px;
+}
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.promo {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+
+.deal-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.deal-card:hover {
+  transform: translateY(-5px);
+}
+
+.slide-img,
+.deal-video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.featured-deals {
+  padding: 60px 20px;
+  background: #fef9f4;
+  text-align: center;
+}
+
+.featured-deals h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #6D3733;
+  margin-bottom: 40px;
+}
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.gucci-card {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fef9f4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.gucci-card:hover {
+  transform: translateY(-4px);
+}
+
+.media-container {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.gucci-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.gucci-info {
+  padding: 16px;
+  text-align: center;
+}
+
+.gucci-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.gucci-info p {
+  font-size: 14px;
+  color: #555;
+}
+
+.gucci-info p strong {
+  color: #6D3733;
+}

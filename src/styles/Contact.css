@@ -1,15 +1,12 @@
-
-
-
 /* ---------- GLOBAL ---------- */
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  background: #f3f3f5;
+  background: #8f6d5b !important;
 }
 
 a {
@@ -136,22 +133,6 @@ a {
 }
 
 /* ---------- BUTTONS ---------- */
-.button {
-  background: linear-gradient(140.14deg, #3c454b42 15.05%, #68817b 114.99%);
-  border-radius: 7px;
-  border: 2px solid transparent;
-  padding: 7px 15px;
-  color: white;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 8px 8px 20px 0px #45090025;
-  transition: all 0.3s;
-}
-
-.button:hover {
-  opacity: 80%;
-}
 
 /* ---------- ACTION ICONS ---------- */
 .header-actions {
@@ -196,13 +177,14 @@ a {
   display: flex;
   justify-content: center;
   padding: 120px 20px 80px;
+  
 }
 
 .contact-card {
   display: flex;
   width: 900px;
   height: 500px;
-  background: white;
+  background: #fbf4ee;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1),
@@ -217,11 +199,11 @@ a {
   justify-content: center;
 }
 
-
 .contact-container .contact-form h2 {
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: bold;
+  color:#8f6d5b
 }
 
 .contact-container .contact-form input,
@@ -246,17 +228,16 @@ a {
 
 .contact-container .contact-form input::placeholder,
 .contact-container .contact-form textarea::placeholder {
-  color: #999;
+  color: #a88f79;
   font-weight: 400;
 }
 
-
 .contact-container .contact-form button {
   padding: 10px 15px;
-  border: 1px solid #000;
+  border: 1px solid #8f6d5b;
   background: transparent;
-  color: #000;
-  border-radius: 5px;
+  color: #8f6d5b;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
@@ -268,60 +249,66 @@ a {
   color: #fff;
 }
 
+/* Side Panel Updated Gradient + Theme */
+.side-panel {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #a88f79, #f7e8e0);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: stretch;
+  padding: 40px;
+  overflow: hidden;
+}
 
-  .side-panel {
-    flex: 1;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    align-items: stretch;
-    padding: 40px;
-    overflow: hidden;
-  }
-  
-  .panel-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* adjust transparency here */
-    z-index: 1;
-  }
-  
-  .panel-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .side-panel h2,
-  .side-panel p,
-  .contact-phone {
-    text-align: left;
-  }
-  
-  .side-panel h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  
-  .side-panel p {
-    font-size: 18px;           /* Bigger text */
-    font-weight: 400;
-    line-height: 1.5;          /* More vertical spacing */
-    letter-spacing: 0.3px;     /* Slightly more space between letters */
-    max-width: 450px;          /* Slightly wider paragraph */
-    color: #f5f5f5;
-    margin-top: 20px; 
-  }
-  
-  .contact-phone {
-    margin-top: auto;
-    padding-top: 40px;
-    font-size: 16px;
-    font-weight: bold;
-  }
+.panel-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.panel-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.side-panel h2,
+.side-panel p,
+.contact-phone {
+  text-align: left;
+}
+
+.side-panel h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.side-panel p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  max-width: 450px;
+  color: #f5f5f5;
+  margin-top: 20px;
+}
+
+.contact-phone {
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.contact-phone:hover {
+  text-decoration: underline;
+}
