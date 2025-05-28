@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Review = require('../Models/review');
-
+const auth = require('../middleware/auth');
 // GET reviews by productId
 router.get('/:productId', async (req, res) => {
  try {
@@ -15,22 +15,30 @@ router.get('/:productId', async (req, res) => {
   }
 });
 
+
+
 // POST new review
-router.post('/', async (req, res) => {
-  const { productId, userId, rating, comment } = req.body;
+router.post('/',auth , async (req, res) => {
+  const { productId, rating, comment } = req.body;
   try {
     const newReview = new Review({
       productId,
-      userId,
+      userId: req.userId, 
       rating,
       comment,
       createdDate: new Date(),
     });
     await newReview.save();
-    res.status(201).json(newReview);
+   const populatedReview = await Review.findById(newReview._id).populate('userId', 'username');
+
+    res.status(201).json(populatedReview);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to post review' });
   }
 });
 
-module.exports = router;
+
+
+
+module.exports = router; 

@@ -4,13 +4,18 @@
 .login-wrapper {
   height: 100vh;
   width: 100%;
-  background: #8f6d5b;
+  
+  background-image: url('C:\Users\User\Documents\Grad_Proj\github4\jocal-project\src\assets\sand.jpg'); /* Replace with your actual image path */
+  background-size: cover;        /* Makes the image cover the whole area */
+  background-position: center;   /* Centers the image */
+  background-repeat: no-repeat;  /* Prevents repeating */
   display: flex;
   justify-content: center;
   align-items: center;
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
+
 
 .login-wrapper * {
   box-sizing: border-box;

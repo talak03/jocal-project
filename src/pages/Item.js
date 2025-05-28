@@ -5,6 +5,8 @@ import '../styles/Item.css';
 import axios from "axios";
 import { stripHtml } from 'string-strip-html';
 import Navbar from "../components/Navbar";
+    const token = localStorage.getItem("token");
+
 
 const Item = () => {
   const { id } = useParams();
@@ -12,6 +14,8 @@ const Item = () => {
   const [reviewInput, setReviewInput] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   useEffect(() => {
     const fetchProductAndReviews = async () => {
@@ -26,19 +30,30 @@ const Item = () => {
         console.error("Failed to fetch product or reviews", error);
       }
     };
+  
+const storedToken = localStorage.getItem("token");
+setIsLoggedIn(!!storedToken);
+
     fetchProductAndReviews();
   }, [id]);
 
   const addReview = async () => {
+    if(!token) {
+      alert("Please log in to submit a review.");
+      return;
+    }
     if (reviewInput.trim()) {
       const newReview = {
         productId: id,
-        userId: "68149292ca83a1e59d81f4c9",
         rating: selectedRating,
         comment: reviewInput
       };
       try {
-        await axios.post('http://localhost:5000/api/reviews', newReview);
+        await axios.post('http://localhost:5000/api/reviews', newReview, {
+       headers:{
+          Authorization: `Bearer ${token}`, 
+       },
+      });
         setReviewInput('');
         setSelectedRating(0);
 
@@ -49,6 +64,8 @@ const Item = () => {
       }
     }
   };
+
+
 
   const addToWishlist = async () => {
     const token = localStorage.getItem("token");
@@ -76,7 +93,16 @@ const Item = () => {
     }
   };
 
+
+ const calculateAverageRating = () => {
+  if(!reviews || reviews.length === 0) return 0;
+  const total= reviews.reduce((sum, r) => sum + r.rating, 0);
+  return (total / reviews.length).toFixed(1);
+ };
+
+
   if (!product) return <div></div>;
+const avgRating = calculateAverageRating();
 
   return (
     <div>
@@ -110,9 +136,21 @@ const Item = () => {
               </button>
             </div>
           </div>
+ <br />
 
           <div className="review-section">
-            <h3>Reviews</h3>
+            <div className="averagerating">
+  {"★".repeat(Math.round(avgRating)) + "☆".repeat(5 - Math.round(avgRating))}
+  <span style={{ marginLeft: '8px' }}>
+    {avgRating} / 5 ({reviews.length} review{reviews.length !== 1 ? 's' : ''})
+  </span>
+</div>
+<div><br />
+  <h3>Summary Review</h3>
+  <p>{stripHtml(product.summary_en).result || "No summary available."}</p><br />
+  <p>{stripHtml(product.summary_ar).result || "No summary available."}</p>
+</div><br /><br />
+           <h3>Reviews</h3>
             <ul className="review-list">
               {reviews.map((r, index) => (
                 <li key={index}>
@@ -121,7 +159,7 @@ const Item = () => {
                 </li>
               ))}
             </ul>
-
+           {isLoggedIn ?(
             <div className="review-form">
               <div className="star-rating">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -141,6 +179,9 @@ const Item = () => {
               />
               <button onClick={addReview} className="btn-primary">Submit</button>
             </div>
+           ) : (
+              <p className="login-warning">Please log in to submit a review.</p>
+            )}
           </div>
 
         </div>
