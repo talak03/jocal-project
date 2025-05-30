@@ -13,7 +13,7 @@ app.use(express.json()); // for parsing JSON requests
 //app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+// app.use('/api/admin', require('./routes/auth_admin'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contact', require('./routes/Contact'));
 //app.use('/api/protected', require('./routes/protected'));

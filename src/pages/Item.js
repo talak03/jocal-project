@@ -147,8 +147,9 @@ const avgRating = calculateAverageRating();
 </div>
 <div><br />
   <h3>Summary Review</h3>
-  <p>{stripHtml(product.summary_en).result || "No summary available."}</p><br />
-  <p>{stripHtml(product.summary_ar).result || "No summary available."}</p>
+ <p>{stripHtml(product.summary_en || "").result || "No summary available."}</p><br/>
+<p>{stripHtml(product.summary_ar || "").result || ""}</p>
+
 </div><br /><br />
            <h3>Reviews</h3>
             <ul className="review-list">
