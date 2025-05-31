@@ -7,9 +7,11 @@ import Footer from "../components/Footer";
 
 
 const Login = () => {
-  const [isSignUpActive, setIsSignUpActive] = useState(false);
-  const [loginError, setLoginError] = useState("");
+   const [isSignUpActive, setIsSignUpActive] = useState(false);
+const [loginError, setLoginError] = useState("");
  const [registerError, setregisterError] = useState("");
+ const [isAdminMode, setIsAdminMode] = useState(false);
+
   const navigate = useNavigate();
   const containerClass = isSignUpActive ? "login-container right-panel-active" : "login-container";
 
@@ -21,14 +23,19 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const url = isAdminMode
+      ? "http://localhost:5000/api/auth_admin/login"
+      : "http://localhost:5000/api/auth/login";
+
+      const res = await axios.post( url , {
         email,
         password,
       });
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", isAdminMode ? "admin" : "user");
      setLoginError("");
-      navigate("/"); 
+      navigate(isAdminMode? '/admin-dashboard' : '/'); 
 
     } catch (error) {
       const message = error.response?.data?.message || "Login failed";
@@ -93,7 +100,10 @@ const Login = () => {
            {/* LOGIN */}
         <div className="form-container sign-in-container">
           <form onSubmit={handleLogin}>
-            <h1>Sign in</h1> <br/>
+{ <h1>{isAdminMode ? "Admin Sign In" : "Sign in"}</h1>}
+
+
+            <br/>
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Password" required />
             {loginError && <p className="login-error">{loginError}</p>}
@@ -115,7 +125,15 @@ const Login = () => {
               <h1>Hello, Friend!</h1>
               <p>Enter your personal details and start journey with us</p>
               <button className="ghost" onClick={handleToggle}>Sign Up</button>
-                            {/* <button onClick={() =>navigate('/admin-login')}>Admin Login</button> */}
+<button
+  className="ghost"
+  onClick={() => {
+    setIsAdminMode(prev => !prev);
+    setIsSignUpActive(false); 
+  }}
+>
+  {isAdminMode ? "User Login" : "Admin Login"}
+</button>
 
             </div>
           </div>

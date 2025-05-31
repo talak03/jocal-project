@@ -256,3 +256,40 @@ body {
   font-size: 16px;
   color: #FFD700; /* star gold color */
 }
+
+.sale-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4136;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.price-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.sale-price {
+  color: #ff4136;
+  font-weight: bold;
+}
+.image-wrapper {
+  position: relative;
+  width: fit-content;
+  display: inline-block;
+}

@@ -39,6 +39,18 @@ router.post('/',auth , async (req, res) => {
 });
 
 
+router.delete('/:id', auth, async (req, res) => {
+if(req.user.role !== 'admin') {
+  return res.status(403).json({ message: 'Access denied' });
+}
+try
+{
+  await Review.findByIdAndDelete(req.params.id);
+    res.json({ message: "Review deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting review" });
+  }
+});
 
 
 module.exports = router; 
